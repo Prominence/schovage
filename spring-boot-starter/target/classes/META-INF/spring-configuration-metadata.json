@@ -1,0 +1,18 @@
+{
+  "groups": [
+    {
+      "name": "dev.zinchenko.schovage",
+      "type": "dev.zinchenko.schovage.core.conf.StorageSettings",
+      "sourceType": "dev.zinchenko.schovage.spring.starter.SchovageAutoconfiguration",
+      "sourceMethod": "storageSettings()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "dev.zinchenko.schovage.base-path",
+      "type": "java.lang.String",
+      "sourceType": "dev.zinchenko.schovage.core.conf.StorageSettings"
+    }
+  ],
+  "hints": []
+}

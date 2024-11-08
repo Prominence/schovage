@@ -1,0 +1,32 @@
+---
+import {updateApiKey} from "../../../services/apiKeysService";
+import {createApiKey} from "../../../services/apiKeysService";
+import Layout from '../../../layouts/Layout.astro';
+import ApiKeyForm from '../../../components/ApiKeyForm.astro';
+import {getApiKey} from "../../../services/apiKeysService";
+
+const { request, params: { id }} = Astro;
+
+const apiKey = await getApiKey(request, id);
+
+if (Astro.request.method === "POST") {
+    try {
+        const data = await Astro.request.formData();
+        const apiKey = {
+            name: data.get("name") as string
+        }
+        const creationResult = await updateApiKey(Astro.request, id, apiKey);
+        if (creationResult) {
+            return Astro.redirect("/api-keys");
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+}
+---
+
+<Layout title="Edit API Key">
+    <ApiKeyForm apiKey={apiKey} />
+</Layout>

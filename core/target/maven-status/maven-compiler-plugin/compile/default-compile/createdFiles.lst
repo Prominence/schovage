@@ -1,0 +1,11 @@
+dev/zinchenko/schovage/core/model/StoreRequestMetadata.class
+dev/zinchenko/schovage/core/service/StorageServiceImpl.class
+dev/zinchenko/schovage/core/service/StorageServiceImpl$1.class
+dev/zinchenko/schovage/core/service/StorageService.class
+dev/zinchenko/schovage/core/model/SchovageException.class
+dev/zinchenko/schovage/core/model/StoredObject.class
+dev/zinchenko/schovage/core/model/ObjectID.class
+module-info.class
+dev/zinchenko/schovage/core/model/ObjectNotExistException.class
+dev/zinchenko/schovage/core/model/DeleteStrategy.class
+dev/zinchenko/schovage/core/conf/StorageSettings.class

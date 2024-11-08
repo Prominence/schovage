@@ -1,0 +1,68 @@
+---
+import {ApiKey, ApiKeyCreatable, ApiKeyEditable} from "../interface/models";
+import {getBuckets} from "../services/bucketService";
+
+interface Props {
+    apiKey?: ApiKeyEditable;
+}
+
+const { apiKey } = Astro.props;
+
+const bucketNames = (await getBuckets(Astro.request)).map((bucket) => bucket.name);
+---
+
+<form method="POST">
+    <label for="name">API Key Name</label>
+    <input type="text" id="name" name="name" value={apiKey?.name || ""} required />
+
+    {!apiKey &&
+        <label for="bucket">Bucket</label>
+        <select id="bucket" name="bucket" required>
+            <option></option>
+            {bucketNames.map((name) => {
+                return (
+                        <option value={name}>{name}</option>
+                );
+            })}
+        </select>
+    }
+
+    <button class="submit-button" type="submit">{apiKey ? "Save Changes" : "Create API Key"}</button>
+</form>
+
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        max-width: 500px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        margin-bottom: 10px;
+        font-weight: bold;
+    }
+    input, select {
+        margin-bottom: 20px;
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+    .submit-button {
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    .submit-button:hover {
+        background-color: #0056b3;
+    }
+</style>

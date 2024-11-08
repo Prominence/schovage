@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ApiKeyForm from '../../components/ApiKeyForm.astro';
+import {createApiKey} from "../../services/apiKeysService";
+
+if (Astro.request.method === "POST") {
+    try {
+        const data = await Astro.request.formData();
+        const apiKey = {
+            name: data.get("name") as string,
+            bucket: data.get("bucket") as string
+        }
+        const creationResult = await createApiKey(Astro.request, apiKey);
+        if (creationResult) {
+            return Astro.redirect("/api-keys");
+        }
+    } catch (error) {
+        if (error instanceof Error) {
+            console.error(error.message);
+        }
+    }
+}
+---
+
+<Layout title="Create API Key">
+    <ApiKeyForm />
+</Layout>

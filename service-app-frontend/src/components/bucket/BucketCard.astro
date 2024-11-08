@@ -1,0 +1,74 @@
+---
+import { format } from 'date-fns';
+const { bucket: {name, documents_count, created_at} } = Astro.props;
+---
+
+<div class="card">
+    <h2 class="bucket-name">{name}</h2>
+    <p>Files: {documents_count}</p>
+    <p>Created: {format(new Date(created_at), "PP")}</p>
+    <div class="actions">
+<!--        <button class="view-button">View</button>
+        <button class="button edit-button">Edit</button>-->
+        <button class="button delete-button">Delete</button>
+    </div>
+</div>
+
+<script>
+    const deleteButtons = document.querySelectorAll('button.delete-button');
+
+    deleteButtons.forEach((button) => {
+        const id = button.getAttribute('data-id');
+        button.addEventListener('click', () => {
+            fetch(`/api/api-keys/${id}`, {method: 'DELETE'})
+                .then(async (response) => {
+                    if (response.ok) {
+                        document.querySelector(`tr[data-id="${id}"]`).remove();
+                        alert('API Key deleted.');
+                    } else {
+                        alert('Something gone wrong');
+                    }
+                })
+                .catch((reason) => alert(reason));
+        })
+    })
+</script>
+
+<style>
+    .card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .bucket-name {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+    .actions {
+        margin-top: 15px;
+    }
+    .button {
+        margin-right: 10px;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+    }
+    .view-button {
+        background-color: #28a745;
+    }
+    .edit-button {
+        background-color: #ffc107;
+    }
+    .delete-button {
+        background-color: #dc3545;
+    }
+</style>

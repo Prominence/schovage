@@ -1,0 +1,5 @@
+.idea
+*.iml
+tools/postgresql/data
+schovage-data
+*.log

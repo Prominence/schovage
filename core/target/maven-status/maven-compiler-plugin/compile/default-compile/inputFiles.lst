@@ -1,0 +1,10 @@
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/service/StorageServiceImpl.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/model/ObjectID.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/model/ObjectNotExistException.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/conf/StorageSettings.java
+/home/prominence/dev/java/schovage/core/src/main/java/module-info.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/service/StorageService.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/model/StoredObject.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/model/DeleteStrategy.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/model/StoreRequestMetadata.java
+/home/prominence/dev/java/schovage/core/src/main/java/dev/zinchenko/schovage/core/model/SchovageException.java

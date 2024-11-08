@@ -1,0 +1,127 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {deleteApiKey, getApiKeys} from "../../services/apiKeysService";
+
+const { request } = Astro;
+
+let apiKeys = await getApiKeys(request);
+---
+
+<Layout title="File Storage Management - Buckets">
+    <div class="header">
+        <h1 class="title">API Keys</h1>
+        <a href={`/api-keys/add`} class="add-button button">+ Add API Key</a>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Bucket</th>
+            <th>Created At</th>
+            <th>Status</th>
+            <th>Key</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {apiKeys.map(apiKey => {
+            return (
+                    <tr data-id={apiKey.id}>
+                        <td>{apiKey.name}</td>
+                        <td>{apiKey.bucket}</td>
+                        <td>{new Date(apiKey.created_at)}</td>
+                        <td>Active</td>
+                        <td>{apiKey.key}</td>
+                        <td>
+                            <a href={`/api-keys/${apiKey.id}/edit`} class="edit-button button">Edit</a>
+                            <button client:load data-id={apiKey.id} class="delete-button button">Delete</button>
+                        </td>
+                    </tr>
+            );
+        })}
+        </tbody>
+    </table>
+</Layout>
+
+<script>
+    const deleteButtons = document.querySelectorAll('button.delete-button');
+
+    deleteButtons.forEach((button) => {
+        const id = button.getAttribute('data-id');
+        button.addEventListener('click', () => {
+            fetch(`/api/api-keys/${id}`, {method: 'DELETE'})
+                .then(async (response) => {
+                    if (response.ok) {
+                        document.querySelector(`tr[data-id="${id}"]`).remove();
+                        alert('API Key deleted.');
+                    } else {
+                        alert('Something gone wrong');
+                    }
+                })
+                .catch((reason) => alert(reason));
+        })
+    })
+</script>
+
+<style>
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 28px;
+    }
+
+    .button {
+        text-decoration: none;
+    }
+
+    .add-button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .add-button:hover {
+        background-color: #0056b3;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    .edit-button, .delete-button {
+        padding: 8px 12px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #fff;
+    }
+
+    .edit-button {
+        background-color: #ffc107;
+    }
+
+    .delete-button {
+        background-color: #dc3545;
+    }
+</style>

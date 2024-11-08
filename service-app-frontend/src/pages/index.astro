@@ -1,0 +1,11 @@
+---
+import {getGeneralStatistics} from "../services/statisticsService";
+import Dashboard from '../components/Dashboard.astro';
+import Layout from "../layouts/Layout.astro";
+
+const generalStatistics = await getGeneralStatistics(Astro.request);
+---
+
+<Layout title="File Storage Management">
+	<Dashboard generalStatistics={generalStatistics}/>
+</Layout>

@@ -1,0 +1,4 @@
+--patch-module
+dev.zinchenko.schovage.core=_
+--add-reads
+dev.zinchenko.schovage.core=ALL-UNNAMED
