@@ -14,6 +14,4 @@ public interface BucketRepository extends JpaRepository<Bucket, String> {
     Bucket findByOwnerAndName(@NonNull User owner, @NonNull String name);
 
     long countByOwner(@NonNull User owner);
-
-
 }

@@ -1,4 +1,4 @@
-package dev.zinchenko.schovage.app.common.util;
+package dev.zinchenko.schovage.app.common.utils;
 
 import dev.zinchenko.schovage.app.user.entity.User;
 import dev.zinchenko.schovage.core.model.SchovageException;

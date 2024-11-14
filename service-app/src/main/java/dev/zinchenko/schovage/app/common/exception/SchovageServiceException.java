@@ -12,4 +12,8 @@ public class SchovageServiceException extends RuntimeException {
     public SchovageServiceException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    public SchovageServiceException(Throwable cause) {
+        super(cause);
+    }
 }

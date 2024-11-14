@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "api_key_request")
-public class ApiKeyRequest {
+@Table(name = "api_key_usage")
+public class ApiKeyUsage {
     @Id
     @GeneratedValue
     @Column(name = "id", nullable = false)
@@ -23,6 +23,9 @@ public class ApiKeyRequest {
 
     @Column(name = "transferred_size")
     private BigInteger transferredSize;
+
+    @Column(name = "ip")
+    private String ip;
 
     public Long getId() {
         return id;
@@ -54,5 +57,13 @@ public class ApiKeyRequest {
 
     public void setTransferredSize(BigInteger transferredSize) {
         this.transferredSize = transferredSize;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
     }
 }

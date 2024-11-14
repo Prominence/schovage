@@ -9,16 +9,16 @@ import java.util.Set;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+    private final UserDataService userDataService;
     private final RoleService roleService;
 
-    public UserService(UserRepository userRepository, RoleService roleService) {
-        this.userRepository = userRepository;
+    public UserService(UserDataService userDataService, RoleService roleService) {
+        this.userDataService = userDataService;
         this.roleService = roleService;
     }
 
     public boolean anyUserExists() {
-        return userRepository.count() > 0;
+        return userDataService.count() > 0;
     }
 
     public void createAdminUser(String username, String encodedPassword) {
@@ -29,10 +29,10 @@ public class UserService {
         adminUser.setUpdatedBy("system");
         adminUser.setRoles(Set.of(roleService.getUserRole(), roleService.getAdminRole()));
 
-        userRepository.save(adminUser);
+        userDataService.save(adminUser);
     }
 
     public Optional<User> findByUsername(String username) {
-        return userRepository.findByUsername(username);
+        return userDataService.findByUsername(username);
     }
 }

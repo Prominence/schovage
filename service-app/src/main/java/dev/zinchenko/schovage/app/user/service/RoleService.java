@@ -1,28 +1,27 @@
 package dev.zinchenko.schovage.app.user.service;
 
 import dev.zinchenko.schovage.app.user.entity.Role;
-import dev.zinchenko.schovage.app.user.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 @Service
 public class RoleService {
-    private final RoleRepository roleRepository;
+    private final RoleDataService roleDataService;
 
-    public RoleService(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    public RoleService(RoleDataService roleDataService) {
+        this.roleDataService = roleDataService;
     }
 
     public void createIfNotExist(Role role) {
-        if (!roleRepository.existsByName(role.getName())) {
-            roleRepository.save(role);
+        if (!roleDataService.existsByName(role.getName())) {
+            roleDataService.save(role);
         }
     }
 
     public Role getUserRole() {
-        return roleRepository.findByName("ROLE_USER").orElseThrow();
+        return roleDataService.findByName("ROLE_USER").orElseThrow();
     }
 
     public Role getAdminRole() {
-        return roleRepository.findByName("ROLE_ADMIN").orElseThrow();
+        return roleDataService.findByName("ROLE_ADMIN").orElseThrow();
     }
 }
